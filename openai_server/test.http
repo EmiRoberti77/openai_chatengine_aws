@@ -1,0 +1,8 @@
+POST http://localhost:5000/chat
+Content-Type: application/json
+
+{
+    "text": "how far in Basingstoke from London UK in miles?"
+}
+
+###
