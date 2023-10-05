@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { CharServer } from '../API/ChatServer';
 import { ChatResponse, getChatResponse } from '../API/model/ChatResponse';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/Store';
 
 const chatApi = new CharServer();
 
 const Dialog = () => {
   const [response, setResponse] = useState<ChatResponse | undefined>(undefined);
   const [userInput, setUserInput] = useState<string>('');
-  const [history, setHistory] = useState([]);
+  const dispatch = useDispatch();
+  const history = useSelector((state: RootState) => state.history);
 
   const handleUserInput = async () => {
     if (userInput === '') {
