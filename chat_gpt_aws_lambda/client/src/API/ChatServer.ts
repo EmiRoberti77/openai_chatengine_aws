@@ -1,24 +1,25 @@
 import axios, { AxiosError } from 'axios';
-import { ChatResponse } from './model/ChatResponse';
+import { ChatResponse, getChatResponse } from './model/ChatResponse';
 import ApiError from './ApiError';
 
 export class CharServer {
   private endpoint: string;
   constructor() {
-    this.endpoint = ``;
+    this.endpoint = `https://a7zbcv29gc.execute-api.us-east-1.amazonaws.com/prod/chat`;
   }
 
   private async postRequest(text: string): Promise<ChatResponse> {
     try {
       const response = await axios.post(this.endpoint, { text });
       const results = response.data.body.choices;
-      if (results && results.length > 0) {
-        const { role, content } = results[0];
-        return this.fillResponse(role, content);
+
+      if (results) {
+        const { role, content } = results[0].message;
+        return this.fillResponse(content);
       }
       return this.fillResponse();
     } catch (error: ApiError | any) {
-      return this.fillResponse('assistant', error.message);
+      return this.fillResponse(error.message);
     }
   }
 
@@ -26,13 +27,7 @@ export class CharServer {
     return await this.postRequest(text);
   }
 
-  private fillResponse(
-    role: string = 'assistant',
-    content: string = 'no response'
-  ): ChatResponse {
-    return {
-      role,
-      content,
-    };
+  private fillResponse(content: string = 'no response'): ChatResponse {
+    return getChatResponse(content);
   }
 }
