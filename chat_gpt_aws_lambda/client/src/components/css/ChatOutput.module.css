@@ -1,0 +1,27 @@
+.container {
+  max-width: 80%;
+  padding: 10px;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+.user {
+  background-color: #e1f5fe;
+  text-align: left;
+}
+
+.assistant {
+  background-color: #f3e5f5;
+  text-align: right;
+}
+
+.role {
+  font-size: 0.8rem;
+  color: #757575;
+  margin-bottom: 5px;
+}
+
+.content {
+  font-size: 1rem;
+  text-align: left;
+}

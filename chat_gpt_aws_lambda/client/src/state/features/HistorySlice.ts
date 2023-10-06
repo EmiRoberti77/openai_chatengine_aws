@@ -10,8 +10,11 @@ export const historySlice = createSlice({
     pushToHistory: (state, action: PayloadAction<ChatHistory>) => {
       state.push(action.payload);
     },
+    deleteAllHistory: (state) => {
+      return [];
+    },
   },
 });
 
-export const { pushToHistory } = historySlice.actions;
+export const { pushToHistory, deleteAllHistory } = historySlice.actions;
 export default historySlice.reducer;

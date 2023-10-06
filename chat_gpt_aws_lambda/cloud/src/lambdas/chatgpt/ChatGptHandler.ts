@@ -2,6 +2,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import OpenAI from 'openai';
 import { HTTP_CODE, jsonApiProxyResultResponse } from '../../util';
 import { API_KEY } from './Config';
+import { ChatGptQueryHandler } from './ChatGptQueryHandler';
 
 export class ChatGptHandler {
   private event: APIGatewayProxyEvent;
@@ -42,6 +43,8 @@ export class ChatGptHandler {
         messages: [{ role: 'user', content: text }],
         model: 'gpt-3.5-turbo',
       });
+
+      await new ChatGptQueryHandler(chatCompletion).saveQuery;
 
       return jsonApiProxyResultResponse(HTTP_CODE.OK, {
         message: true,

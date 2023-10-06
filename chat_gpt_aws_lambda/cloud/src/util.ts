@@ -29,6 +29,10 @@ export const jsonApiProxyResultResponse = (
   return response;
 };
 
+export enum DYNAMO_TABLES {
+  USER_QUERIES = 'emi_chat_gpt_user_queries',
+}
+
 export const FUNCTION_NAME = 'emi_chat_gpt_lambda';
 export const HANDLER = 'handler';
 export const CHAT_GPT_EMI_API = 'chat_gpt_handler_api';
