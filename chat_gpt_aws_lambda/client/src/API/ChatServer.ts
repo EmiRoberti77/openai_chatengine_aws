@@ -1,8 +1,8 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import {
+  ChatInput,
   ChatResponse,
   fillChatResponse,
-  getChatResponse,
 } from './model/ChatResponse';
 import ApiError from './ApiError';
 import { UsageToken } from './model/Usage';
@@ -10,12 +10,16 @@ import { UsageToken } from './model/Usage';
 export class CharServer {
   private endpoint: string;
   constructor() {
-    this.endpoint = `https://a7zbcv29gc.execute-api.us-east-1.amazonaws.com/prod/chat`;
+    this.endpoint = process.env.REACT_APP_API_END_POINT!;
   }
 
-  private async postRequest(text: string): Promise<ChatResponse> {
+  private async postRequest(chatInput: ChatInput): Promise<ChatResponse> {
     try {
-      const response = await axios.post(this.endpoint, { text });
+      const response = await axios.post(this.endpoint, chatInput, {
+        headers: {
+          'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+      });
       const results = response.data.body.choices;
       const usage: UsageToken = response.data.body.usage;
 
@@ -33,8 +37,8 @@ export class CharServer {
     }
   }
 
-  public async askServer(text: string): Promise<ChatResponse> {
-    return await this.postRequest(text);
+  public async askServer(chatInput: ChatInput): Promise<ChatResponse> {
+    return await this.postRequest(chatInput);
   }
 
   private fillResponse(

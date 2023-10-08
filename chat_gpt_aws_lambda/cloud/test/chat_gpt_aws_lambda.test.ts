@@ -5,7 +5,7 @@ const testChatLambda = async (): Promise<void> => {
   const param = {
     httpMethod: HTTP_METHOD.POST,
     body: JSON.stringify({
-      text: '2+2?',
+      text: 'what is 2+2+3=?',
     }),
   };
 

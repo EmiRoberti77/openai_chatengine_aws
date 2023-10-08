@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { HTTP_CODE, HTTP_METHOD, jsonApiProxyResultResponse } from '../../util';
+import { HTTP_METHOD } from '../../util';
 import { ChatGptHandler } from './ChatGptHandler';
 
 export const handler = async (

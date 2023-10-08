@@ -16,6 +16,7 @@ const chatApi = new CharServer();
 
 const Dialog: React.FC = () => {
   const [response, setResponse] = useState<ChatResponse | undefined>(undefined);
+  const [userName, setUserName] = useState<string>('');
   const [userInput, setUserInput] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -44,8 +45,15 @@ const Dialog: React.FC = () => {
       setResponse(getChatResponse('missing question'));
       return;
     }
+    if (userName === '') {
+      setResponse(getChatResponse('missing username'));
+      return;
+    }
     setIsLoading(true);
-    const chatResponse: ChatResponse = await chatApi.askServer(userInput);
+    const chatResponse: ChatResponse = await chatApi.askServer({
+      username: userName,
+      input: userInput,
+    });
     setResponse(chatResponse);
     setIsLoading(false);
     dispatch(pushToHistory(createHistory(userInput, chatResponse)));
@@ -88,6 +96,13 @@ const Dialog: React.FC = () => {
           </div>
 
           <div style={{ flex: 1, padding: '20px' }}>
+            <div>
+              <input
+                type="text"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
             <div>
               <textarea
                 value={userInput}

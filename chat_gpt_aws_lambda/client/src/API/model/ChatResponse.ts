@@ -1,5 +1,10 @@
 import { UsageToken } from './Usage';
 
+export interface ChatInput {
+  username: string;
+  input: string;
+}
+
 export interface ChatResponse {
   content: string;
   role: string;

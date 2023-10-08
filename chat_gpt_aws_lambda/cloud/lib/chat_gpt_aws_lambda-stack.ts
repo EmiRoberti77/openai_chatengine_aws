@@ -14,13 +14,16 @@ import { join } from 'path';
 import { existsSync } from 'fs';
 import {
   Cors,
+  Deployment,
   LambdaIntegration,
   ResourceOptions,
   RestApi,
+  Stage,
 } from 'aws-cdk-lib/aws-apigateway';
 import { AttributeType, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { API_KEY } from '../src/lambdas/chatgpt/Config';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import { ApiGateway } from 'aws-cdk-lib/aws-events-targets';
 
 export class ChatGptAwsLambdaStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -69,6 +72,12 @@ export class ChatGptAwsLambdaStack extends cdk.Stack {
 
     const api = new RestApi(this, CHAT_GPT_EMI_API);
 
+    // const deployment = new Deployment(this, 'Deployment', { api: api });
+    // const stage = new Stage(this, 'Stage', {
+    //   stageName: 'prod',
+    //   deployment,
+    // });
+
     const optionsWithCors: ResourceOptions = {
       defaultCorsPreflightOptions: {
         allowOrigins: Cors.ALL_ORIGINS,
@@ -76,9 +85,30 @@ export class ChatGptAwsLambdaStack extends cdk.Stack {
       },
     };
 
+    const apiKey = api.addApiKey('emi_demo_key_1977');
+
+    const plan = api.addUsagePlan('emiChatGPTusagePlan', {
+      name: 'emiChatGPTusagePlan',
+      throttle: {
+        rateLimit: 10,
+        burstLimit: 20,
+      },
+    });
+
+    plan.addApiKey(apiKey); // Associate the API key with the usage plan
+
+    // plan.addApiStage({
+    //   stage,
+    // });
+
     const apiResources = api.root.addResource(CHAT, optionsWithCors);
     const lambdaIntegration = new LambdaIntegration(chatgptLambda);
-    apiResources.addMethod(HTTP_METHOD.GET, lambdaIntegration);
-    apiResources.addMethod(HTTP_METHOD.POST, lambdaIntegration);
+
+    apiResources.addMethod(HTTP_METHOD.GET, lambdaIntegration, {
+      apiKeyRequired: true,
+    });
+    apiResources.addMethod(HTTP_METHOD.POST, lambdaIntegration, {
+      apiKeyRequired: true,
+    });
   }
 }
