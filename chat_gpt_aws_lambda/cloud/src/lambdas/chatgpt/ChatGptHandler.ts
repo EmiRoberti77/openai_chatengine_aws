@@ -5,11 +5,23 @@ import { API_KEY } from './Config';
 import { ChatGptQueryHandler } from './ChatGptQueryHandler';
 import { ChatQueryParam } from './ChatQueryParam';
 import { randomUUID } from 'crypto';
-
+import { SSMClient, GetParameterCommand } from '@aws-sdk/client-ssm';
+const ssmClient = new SSMClient({});
 export class ChatGptHandler {
   private event: APIGatewayProxyEvent;
+
   constructor(event: APIGatewayProxyEvent) {
     this.event = event;
+  }
+
+  private async getSecret(key: string): Promise<string | undefined> {
+    const command = new GetParameterCommand({
+      Name: key,
+      WithDecryption: false,
+    });
+    const response = await ssmClient.send(command);
+    const keyValue = response.Parameter?.Value;
+    return keyValue;
   }
 
   public async get(): Promise<APIGatewayProxyResult> {
@@ -37,8 +49,16 @@ export class ChatGptHandler {
       const { input, username } = JSON.parse(this.event.body);
       console.log(username, input);
 
+      const openAiKey = await this.getSecret('chat_gpt_api_key');
+      if (!this.event.body) {
+        return jsonApiProxyResultResponse(HTTP_CODE.NOT_FOUND, {
+          message: false,
+          body: 'missing chat_gpt_api_key',
+        });
+      }
+
       const openai = new (OpenAI as any)({
-        apiKey: API_KEY,
+        apiKey: openAiKey,
       });
 
       const chatCompletion = await openai.chat.completions.create({

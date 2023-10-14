@@ -14,16 +14,14 @@ import { join } from 'path';
 import { existsSync } from 'fs';
 import {
   Cors,
-  Deployment,
   LambdaIntegration,
   ResourceOptions,
   RestApi,
-  Stage,
 } from 'aws-cdk-lib/aws-apigateway';
 import { AttributeType, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { API_KEY } from '../src/lambdas/chatgpt/Config';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
-import { ApiGateway } from 'aws-cdk-lib/aws-events-targets';
+import * as secrets from 'aws-cdk-lib/aws-secretsmanager';
 
 export class ChatGptAwsLambdaStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -50,6 +48,14 @@ export class ChatGptAwsLambdaStack extends cdk.Stack {
       },
     });
 
+    //get secret key for CHAT GPT Key
+    const secret = secrets.Secret.fromSecretNameV2(
+      this,
+      'chat_gpt_api_key',
+      'chat_gpt_api_key'
+    );
+
+    //create lambda
     const chatgptLambda = new NodejsFunction(this, FUNCTION_NAME, {
       runtime: Runtime.NODEJS_18_X,
       functionName: FUNCTION_NAME,
@@ -59,13 +65,17 @@ export class ChatGptAwsLambdaStack extends cdk.Stack {
       environment: {
         USER_QUERY_TABLE: DYNAMO_TABLES.USER_QUERIES,
         OPEN_AI_KEY: API_KEY,
+        CHAT_OPEN_AI_KEY: secret.secretName,
       },
     });
 
     chatgptLambda.addToRolePolicy(
       new PolicyStatement({
         effect: Effect.ALLOW,
-        resources: [table.tableArn],
+        resources: [
+          table.tableArn,
+          'arn:aws:ssm:us-east-1:432599188850:parameter/chat_gpt_api_key',
+        ],
         actions: ['*'],
       })
     );
