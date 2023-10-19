@@ -1,7 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import OpenAI from 'openai';
 import { HTTP_CODE, jsonApiProxyResultResponse } from '../../util';
-import { API_KEY } from './Config';
 import { ChatGptQueryHandler } from './ChatGptQueryHandler';
 import { ChatQueryParam } from './ChatQueryParam';
 import { randomUUID } from 'crypto';
