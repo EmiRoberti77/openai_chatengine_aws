@@ -24,10 +24,18 @@ export class ChatGptHandler {
   }
 
   public async get(): Promise<APIGatewayProxyResult> {
-    return jsonApiProxyResultResponse(HTTP_CODE.OK, {
-      message: true,
-      body: 'Handler GET',
-    });
+    try {
+      const response = await new ChatGptQueryHandler().getQuery(5);
+      return jsonApiProxyResultResponse(HTTP_CODE.OK, {
+        message: true,
+        body: response,
+      });
+    } catch (error: any) {
+      return jsonApiProxyResultResponse(HTTP_CODE.ERROR, {
+        message: false,
+        body: error.message,
+      });
+    }
   }
 
   public async noService(): Promise<APIGatewayProxyResult> {

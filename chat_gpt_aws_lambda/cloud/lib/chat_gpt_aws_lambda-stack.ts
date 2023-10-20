@@ -19,7 +19,6 @@ import {
   RestApi,
 } from 'aws-cdk-lib/aws-apigateway';
 import { AttributeType, Table } from 'aws-cdk-lib/aws-dynamodb';
-import { API_KEY } from '../src/lambdas/chatgpt/Config';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import * as secrets from 'aws-cdk-lib/aws-secretsmanager';
 
@@ -64,7 +63,6 @@ export class ChatGptAwsLambdaStack extends cdk.Stack {
       timeout: cdk.Duration.seconds(20),
       environment: {
         USER_QUERY_TABLE: DYNAMO_TABLES.USER_QUERIES,
-        OPEN_AI_KEY: API_KEY,
         CHAT_OPEN_AI_KEY: secret.secretName,
       },
     });
