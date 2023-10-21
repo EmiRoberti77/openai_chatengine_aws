@@ -11,6 +11,7 @@ import {
 import { ChatHistory } from '../API/model/ChatHistory';
 import ChatOutput from './ChatOutput';
 import HistoryItem from './HistoryItem';
+import SavedHistory from './SavedHistory';
 
 const chatApi = new CharServer();
 
@@ -87,7 +88,7 @@ const Dialog: React.FC = () => {
             <button onClick={() => deleteHistoryHandler()}>
               clear history
             </button>
-            {history.map((item, index) => (
+            {[...history].reverse().map((item, index) => (
               <div key={index}>
                 <HistoryItem historyItem={item} />
                 <hr />
@@ -135,6 +136,9 @@ const Dialog: React.FC = () => {
               ) : (
                 ''
               )}
+              <div>
+                <SavedHistory />
+              </div>
             </div>
           </div>
         </div>

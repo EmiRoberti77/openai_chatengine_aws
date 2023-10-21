@@ -1,48 +1,39 @@
 import React, { useEffect } from 'react';
-import { ChatHistory } from '../API/model/ChatHistory';
+import { SavedChatHistory } from '../API/model/SaveChatHistory';
 
-interface HistoryItemProps {
-  historyItem: ChatHistory;
+interface SavedHistoryItemProp {
+  savedChatItem: SavedChatHistory;
 }
-
-const HistoryItem: React.FC<HistoryItemProps> = ({ historyItem }) => {
+const SavedHistoryItem: React.FC<SavedHistoryItemProp> = ({
+  savedChatItem,
+}) => {
   useEffect(() => {
-    console.log('historyItem', historyItem);
+    console.log('savedChatItem', savedChatItem);
   }, []);
 
-  const isValid = () => {
-    if (!historyItem) {
-      console.log('historyItem is null', historyItem);
-      return false;
-    }
-    return true;
-  };
-
-  return isValid() ? (
+  return (
     <div style={styles.container}>
-      <div style={styles.date}>{historyItem.createdAt}</div>
+      <div style={styles.date}>{savedChatItem.createdAt}</div>
       <div>
         <span style={styles.label}>input:</span>
-        {historyItem.input}
+        {savedChatItem.userInput.input}
       </div>
       <div>
         <span style={styles.label}>role:</span>
-        {historyItem.role}
+        {savedChatItem.chatCompletion.choices[0].message.role}
       </div>
-      <div style={styles.content}>{historyItem.content}</div>
+      <div style={styles.content}>
+        {savedChatItem.chatCompletion.choices[0].message.content}
+      </div>
       <hr />
       <div style={styles.usage}>
-        prompt tokens: {historyItem.usage.prompt_tokens}, completion token:{' '}
-        {historyItem.usage.completion_tokens}, total:{' '}
-        {historyItem.usage.total_tokens}
+        prompt tokens: {savedChatItem.chatCompletion.usage.prompt_tokens},
+        completion token: {savedChatItem.chatCompletion.usage.completion_tokens}
+        , total: {savedChatItem.chatCompletion.usage.total_tokens}
       </div>
     </div>
-  ) : (
-    <div>NO data</div>
   );
 };
-
-export default HistoryItem;
 
 const styles = {
   container: {
@@ -85,5 +76,4 @@ const styles = {
   },
 };
 
-// Use the styles in your React component
-// For example: <div style={styles.container}></div>
+export default SavedHistoryItem;

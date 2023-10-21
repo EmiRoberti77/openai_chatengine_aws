@@ -6,6 +6,8 @@ import {
 } from './model/ChatResponse';
 import ApiError from './ApiError';
 import { UsageToken } from './model/Usage';
+import { ChatHistory } from './model/ChatHistory';
+import { SavedChatHistory } from './model/SaveChatHistory';
 
 export class CharServer {
   private endpoint: string;
@@ -34,6 +36,20 @@ export class CharServer {
         completion_tokens: 0,
         total_tokens: 0,
       });
+    }
+  }
+
+  public async getSavedChats(): Promise<SavedChatHistory[] | undefined> {
+    try {
+      const response = await axios.get(this.endpoint, {
+        headers: {
+          'x-api-key': process.env.REACT_APP_API_KEY,
+        },
+      });
+      return response.data.body as SavedChatHistory[];
+    } catch (error: any) {
+      console.error(error.message);
+      return undefined;
     }
   }
 
