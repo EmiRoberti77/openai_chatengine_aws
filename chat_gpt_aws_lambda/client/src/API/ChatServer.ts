@@ -19,7 +19,7 @@ export class CharServer {
     try {
       const response = await axios.post(this.endpoint, chatInput, {
         headers: {
-          'x-api-key': process.env.REACT_APP_API_KEY,
+          'x-api-key': process.env.REACT_APP_API_KEY!,
         },
       });
       const results = response.data.body.choices;
@@ -43,7 +43,7 @@ export class CharServer {
     try {
       const response = await axios.get(this.endpoint, {
         headers: {
-          'x-api-key': process.env.REACT_APP_API_KEY,
+          'x-api-key': process.env.REACT_APP_API_KEY!,
         },
       });
       return response.data.body as SavedChatHistory[];

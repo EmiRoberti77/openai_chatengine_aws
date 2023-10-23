@@ -12,6 +12,7 @@ import { ChatHistory } from '../API/model/ChatHistory';
 import ChatOutput from './ChatOutput';
 import HistoryItem from './HistoryItem';
 import SavedHistory from './SavedHistory';
+import { Auth } from 'aws-amplify';
 
 const chatApi = new CharServer();
 
@@ -25,6 +26,15 @@ const Dialog: React.FC = () => {
 
   const deleteHistoryHandler = () => {
     dispatch(deleteAllHistory());
+  };
+
+  const logout = async () => {
+    Auth.signOut()
+      .then((success) => {
+        console.info(success);
+        window.location.reload();
+      })
+      .catch((err) => console.error(err));
   };
 
   const createHistory = (
@@ -84,6 +94,7 @@ const Dialog: React.FC = () => {
               padding: '20px',
             }}
           >
+            <button onClick={logout}>Logout</button>
             <h4>History:</h4>
             <button onClick={() => deleteHistoryHandler()}>
               clear history
