@@ -1,8 +1,8 @@
-Generative AI Client Server prompt Application
-CDK deployemt 
-AWS cloudfront
-React 
-Typescript
+Generative AI Client Server prompt Application,
+CDK deployemt,
+AWS cloudfront,
+React,
+Typescript,
 DynamoDB , Lambdas , serverless
 OpenAI ChatGPT
 
