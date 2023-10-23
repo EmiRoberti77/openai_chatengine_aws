@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CharServer } from '../API/ChatServer';
 import { ChatResponse, getChatResponse } from '../API/model/ChatResponse';
 import { useDispatch } from 'react-redux';
@@ -19,6 +19,7 @@ const chatApi = new CharServer();
 const Dialog: React.FC = () => {
   const [response, setResponse] = useState<ChatResponse | undefined>(undefined);
   const [userName, setUserName] = useState<string>('');
+  const [fullUserName, setFullUserName] = useState<string>('');
   const [userInput, setUserInput] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -28,10 +29,22 @@ const Dialog: React.FC = () => {
     dispatch(deleteAllHistory());
   };
 
+  const getUser = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    setUserName(user.attributes.email);
+    setFullUserName(
+      `${user.attributes.given_name} ${user.attributes.family_name}`
+    );
+    console.info('user logged in', user);
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
+
   const logout = async () => {
     Auth.signOut()
       .then((success) => {
-        console.info(success);
+        console.info('signOut', success);
         window.location.reload();
       })
       .catch((err) => console.error(err));
@@ -94,11 +107,15 @@ const Dialog: React.FC = () => {
               padding: '20px',
             }}
           >
+            <hr />
             <button onClick={logout}>Logout</button>
-            <h4>History:</h4>
             <button onClick={() => deleteHistoryHandler()}>
               clear history
             </button>
+            <hr />
+            <h4>{fullUserName}</h4>
+            <hr />
+            <h4>History:</h4>
             {[...history].reverse().map((item, index) => (
               <div key={index}>
                 <HistoryItem historyItem={item} />
@@ -110,6 +127,7 @@ const Dialog: React.FC = () => {
           <div style={{ flex: 1, padding: '20px' }}>
             <div>
               <input
+                style={{ width: '250px', backgroundColor: 'lightgrey' }}
                 type="text"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}

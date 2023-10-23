@@ -15,12 +15,11 @@ const SavedHistory: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchSavedHistory = async () => {
-    console.log('fetching data');
     setLoading(true);
     const response = await chatServer.getSavedChats();
-    console.log('response', response);
+    //console.log('response', response);
     setSavedChats(response);
-    console.log(savedChats);
+    //console.log(savedChats);
     setLoading(false);
   };
 

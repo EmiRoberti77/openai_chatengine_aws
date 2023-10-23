@@ -7,10 +7,6 @@ interface SavedHistoryItemProp {
 const SavedHistoryItem: React.FC<SavedHistoryItemProp> = ({
   savedChatItem,
 }) => {
-  useEffect(() => {
-    console.log('savedChatItem', savedChatItem);
-  }, []);
-
   return (
     <div style={styles.container}>
       <div style={styles.date}>{savedChatItem.createdAt}</div>
