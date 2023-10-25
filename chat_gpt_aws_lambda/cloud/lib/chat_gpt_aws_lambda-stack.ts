@@ -18,7 +18,7 @@ import {
   ResourceOptions,
   RestApi,
 } from 'aws-cdk-lib/aws-apigateway';
-import { AttributeType, Table } from 'aws-cdk-lib/aws-dynamodb';
+import { AttributeType, ProjectionType, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import * as secrets from 'aws-cdk-lib/aws-secretsmanager';
 
@@ -47,6 +47,20 @@ export class ChatGptAwsLambdaStack extends cdk.Stack {
       },
     });
 
+    table.addGlobalSecondaryIndex({
+      indexName: 'userNameDateIndex',
+      partitionKey: {
+        name: 'username',
+        type: AttributeType.STRING,
+      },
+      sortKey: {
+        name: 'timestamp',
+        type: AttributeType.NUMBER,
+      },
+
+      projectionType: ProjectionType.ALL,
+    });
+
     //get secret key for CHAT GPT Key
     const secret = secrets.Secret.fromSecretNameV2(
       this,
@@ -73,6 +87,7 @@ export class ChatGptAwsLambdaStack extends cdk.Stack {
         resources: [
           table.tableArn,
           'arn:aws:ssm:us-east-1:432599188850:parameter/chat_gpt_api_key',
+          `${table.tableArn}/index/userNameDateIndex`,
         ],
         actions: ['*'],
       })

@@ -1,12 +1,13 @@
 import {
   DynamoDBClient,
   PutItemCommand,
+  QueryCommand,
   ScanCommand,
 } from '@aws-sdk/client-dynamodb';
 import { DYNAMO_TABLES } from '../../util';
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
 import { ChatQueryParam } from './ChatQueryParam';
-import { constrainedMemory } from 'process';
+
 export class ChatGptQueryHandler {
   private dbClient: DynamoDBClient;
   private query: ChatQueryParam | undefined;
@@ -16,7 +17,7 @@ export class ChatGptQueryHandler {
     this.query = query || undefined;
   }
 
-  public async getQuery(limit: number): Promise<any> {
+  public async scan(limit: number): Promise<any> {
     const params = {
       TableName: DYNAMO_TABLES.USER_QUERIES,
     };
@@ -36,6 +37,31 @@ export class ChatGptQueryHandler {
         result.push(unmarshall(sorted[i]));
       }
       return result;
+    } catch (error: any) {
+      console.error(error.message);
+      return undefined;
+    }
+  }
+
+  public async getQuery(username: string): Promise<any> {
+    console.log('username', username);
+    const params = {
+      TableName: DYNAMO_TABLES.USER_QUERIES,
+      IndexName: 'userNameDateIndex',
+      KeyConditionExpression: 'username = :usernameValue',
+      ExpressionAttributeValues: {
+        ':usernameValue': {
+          S: username,
+        },
+      },
+      ScanIndexForward: false,
+    };
+
+    try {
+      const response = await this.dbClient.send(new QueryCommand(params));
+      if (!response.Items) return [];
+      console.log(response.Items);
+      return response.Items.map((row) => unmarshall(row));
     } catch (error: any) {
       console.error(error.message);
       return undefined;

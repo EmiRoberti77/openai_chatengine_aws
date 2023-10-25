@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { ChatHistory } from '../API/model/ChatHistory';
 import { CharServer } from '../API/ChatServer';
-import { error } from 'console';
-import HistoryItem from './HistoryItem';
 import SavedHistoryItem from './SavedHistoryItem';
 import { SavedChatHistory } from '../API/model/SaveChatHistory';
+import { Auth } from 'aws-amplify';
 
 const chatServer = new CharServer();
 
@@ -16,7 +14,10 @@ const SavedHistory: React.FC = () => {
 
   const fetchSavedHistory = async () => {
     setLoading(true);
-    const response = await chatServer.getSavedChats();
+    const sessionUser = await Auth.currentAuthenticatedUser();
+    const user = sessionUser.attributes.email;
+
+    const response = await chatServer.getSavedChats(user);
     //console.log('response', response);
     setSavedChats(response);
     //console.log(savedChats);

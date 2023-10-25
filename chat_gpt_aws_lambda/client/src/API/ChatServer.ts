@@ -39,9 +39,12 @@ export class CharServer {
     }
   }
 
-  public async getSavedChats(): Promise<SavedChatHistory[] | undefined> {
+  public async getSavedChats(
+    user: string
+  ): Promise<SavedChatHistory[] | undefined> {
     try {
-      const response = await axios.get(this.endpoint, {
+      const ePoint = `${this.endpoint}?username=${user}`;
+      const response = await axios.get(ePoint, {
         headers: {
           'x-api-key': process.env.REACT_APP_API_KEY!,
         },

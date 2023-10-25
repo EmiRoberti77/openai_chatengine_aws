@@ -1,5 +1,6 @@
 export interface SavedChatHistory {
   createdAt: string;
+  username: string;
   userInput: UserInput;
   id: string;
   chatCompletion: ChatCompletion;

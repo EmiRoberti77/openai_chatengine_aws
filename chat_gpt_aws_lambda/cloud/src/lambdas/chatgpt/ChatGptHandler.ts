@@ -5,6 +5,7 @@ import { ChatGptQueryHandler } from './ChatGptQueryHandler';
 import { ChatQueryParam } from './ChatQueryParam';
 import { randomUUID } from 'crypto';
 import { SSMClient, GetParameterCommand } from '@aws-sdk/client-ssm';
+import { timeStamp } from 'console';
 const ssmClient = new SSMClient({});
 export class ChatGptHandler {
   private event: APIGatewayProxyEvent;
@@ -23,9 +24,9 @@ export class ChatGptHandler {
     return keyValue;
   }
 
-  public async get(): Promise<APIGatewayProxyResult> {
+  private async scan(): Promise<APIGatewayProxyResult> {
     try {
-      const response = await new ChatGptQueryHandler().getQuery(5);
+      const response = await new ChatGptQueryHandler().scan(5);
       return jsonApiProxyResultResponse(HTTP_CODE.OK, {
         message: true,
         body: response,
@@ -36,6 +37,35 @@ export class ChatGptHandler {
         body: error.message,
       });
     }
+  }
+
+  private async getByUser(username: string): Promise<APIGatewayProxyResult> {
+    try {
+      const response = await new ChatGptQueryHandler().getQuery(username);
+      return jsonApiProxyResultResponse(HTTP_CODE.OK, {
+        message: true,
+        body: response,
+      });
+    } catch (error: any) {
+      return jsonApiProxyResultResponse(HTTP_CODE.ERROR, {
+        message: false,
+        body: error.message,
+      });
+    }
+  }
+
+  public async get(): Promise<APIGatewayProxyResult> {
+    if (!this.event.queryStringParameters) {
+      return await this.scan();
+    }
+    const { username } = this.event.queryStringParameters;
+    if (!username)
+      return jsonApiProxyResultResponse(HTTP_CODE.OK, {
+        message: false,
+        body: 'missing username from queryStringParameters',
+      });
+
+    return this.getByUser(username);
   }
 
   public async noService(): Promise<APIGatewayProxyResult> {
@@ -74,9 +104,12 @@ export class ChatGptHandler {
       });
 
       //prep query to be saved in dynamo table
+      const d = new Date();
       const chatQueryParam: ChatQueryParam = {
         id: randomUUID(),
-        createdAt: new Date().toISOString(),
+        username,
+        timestamp: d.getTime(),
+        createdAt: d.toISOString(),
         userInput: {
           user: username,
           role: 'user',

@@ -6,6 +6,8 @@ export interface UserInput {
 
 export interface ChatQueryParam {
   id: string;
+  username: string;
+  timestamp: number;
   createdAt: string;
   chatCompletion: any; //this is the ChatGPT return
   userInput: UserInput;
