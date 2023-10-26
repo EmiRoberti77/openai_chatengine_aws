@@ -1,0 +1,53 @@
+.user-card {
+  width: 250px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.user-card h4,
+.user-card h5 {
+  margin: 10px 0;
+}
+
+.user-card hr {
+  border: 0;
+  border-top: 1px solid #f1f1f1;
+  margin: 20px 0;
+}
+
+/* Basic button styling */
+.styled-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-right: 10px;
+}
+
+/* Color and hover effect for Logout button */
+.styled-button.logout {
+  background-color: #e74c3c; /* Red color for logout */
+  color: #ffffff;
+}
+
+.styled-button.logout:hover {
+  background-color: #c0392b; /* Darker red on hover */
+  transform: translateY(-2px);
+}
+
+/* Color and hover effect for Clear History button */
+.styled-button.clear-history {
+  background-color: #3498db; /* Blue color for clear history */
+  color: #ffffff;
+}
+
+.styled-button.clear-history:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+  transform: translateY(-2px);
+}

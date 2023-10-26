@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CharServer } from '../API/ChatServer';
 import { ChatResponse, getChatResponse } from '../API/model/ChatResponse';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../state/Store';
 import {
   pushToHistory,
@@ -13,6 +12,8 @@ import ChatOutput from './ChatOutput';
 import HistoryItem from './HistoryItem';
 import SavedHistory from './SavedHistory';
 import { Auth } from 'aws-amplify';
+import { removeUser } from '../state/features/UserSlice';
+import './css/Dialog.css';
 
 const chatApi = new CharServer();
 
@@ -46,6 +47,7 @@ const Dialog: React.FC = () => {
       .then((success) => {
         console.info('signOut', success);
         window.location.reload();
+        dispatch(removeUser());
       })
       .catch((err) => console.error(err));
   };
@@ -108,13 +110,21 @@ const Dialog: React.FC = () => {
             }}
           >
             <hr />
-            <button onClick={logout}>Logout</button>
-            <button onClick={() => deleteHistoryHandler()}>
-              clear history
+            <button className="styled-button logout" onClick={logout}>
+              Logout
+            </button>
+
+            <button
+              className="styled-button clear-history"
+              onClick={() => deleteHistoryHandler()}
+            >
+              Clear History
             </button>
             <hr />
-            <h4>{fullUserName}</h4>
-            <hr />
+            <div className="user-card">
+              <h4>{fullUserName}</h4>
+              <h5>{userName}</h5>
+            </div>
             <h4>History:</h4>
             {[...history].reverse().map((item, index) => (
               <div key={index}>
@@ -125,14 +135,6 @@ const Dialog: React.FC = () => {
           </div>
 
           <div style={{ flex: 1, padding: '20px' }}>
-            <div>
-              <input
-                style={{ width: '250px', backgroundColor: 'lightgrey' }}
-                type="text"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
             <div>
               <textarea
                 value={userInput}
@@ -146,6 +148,7 @@ const Dialog: React.FC = () => {
             </div>
             <div style={{ marginTop: '10px' }}>
               <button
+                className="styled-button clear-history"
                 onClick={handleUserInput}
                 style={{ padding: '10px 15px' }}
               >

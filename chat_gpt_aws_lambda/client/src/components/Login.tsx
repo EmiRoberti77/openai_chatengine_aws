@@ -1,9 +1,12 @@
 import { Authenticator } from '@aws-amplify/ui-react';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../state/features/UserSlice';
 interface LoginProps {
   setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Login: React.FC<LoginProps> = ({ setIsLogged }) => {
+  const dispatch = useDispatch();
   const cardStyle: React.CSSProperties = {
     width: '300px',
     padding: '20px',
@@ -94,7 +97,16 @@ const Login: React.FC<LoginProps> = ({ setIsLogged }) => {
       >
         {({ signOut, user }) => {
           if (user) {
-            setIsLogged(true);
+            setIsLogged(true); //
+            console.log('user', user.attributes?.email);
+            dispatch(
+              setUser({
+                username: user.attributes?.email || 'no user',
+                given_name: user.attributes?.given_name || 'no user',
+                family_name: user.attributes?.family_name || 'no user',
+                sessionLoginTime: new Date().toISOString(),
+              })
+            );
           }
           return <></>; // return empty JSX element to satisfy call back
         }}

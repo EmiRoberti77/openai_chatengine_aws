@@ -3,10 +3,13 @@ import { CharServer } from '../API/ChatServer';
 import SavedHistoryItem from './SavedHistoryItem';
 import { SavedChatHistory } from '../API/model/SaveChatHistory';
 import { Auth } from 'aws-amplify';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/Store';
 
 const chatServer = new CharServer();
 
 const SavedHistory: React.FC = () => {
+  const reduxUser = useSelector((state: RootState) => state.user);
   const [savedChats, setSavedChats] = useState<SavedChatHistory[] | undefined>(
     undefined
   );
@@ -25,6 +28,7 @@ const SavedHistory: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log('reduxUser', reduxUser);
     fetchSavedHistory().catch((error) => console.error(error));
   }, []);
 

@@ -43,7 +43,7 @@ export class ChatGptQueryHandler {
     }
   }
 
-  public async getQuery(username: string): Promise<any> {
+  public async getQuery(username: string, limit: number = 10): Promise<any> {
     console.log('username', username);
     const params = {
       TableName: DYNAMO_TABLES.USER_QUERIES,
@@ -55,6 +55,7 @@ export class ChatGptQueryHandler {
         },
       },
       ScanIndexForward: false,
+      Limit: limit,
     };
 
     try {
