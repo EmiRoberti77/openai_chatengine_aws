@@ -7,10 +7,15 @@ import {
 import { DYNAMO_TABLES } from '../../util';
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
 import { ChatQueryParam } from './ChatQueryParam';
+const AmazonDaxClient = require('amazon-dax-client');
+import { DynamoDB } from 'aws-sdk';
 
 export class ChatGptQueryHandler {
   private dbClient: DynamoDBClient;
   private query: ChatQueryParam | undefined;
+  private dax_endpoint: string[] = [
+    'daxs://cgpt-dax-cluster.crj460.dax-clusters.us-east-1.amazonaws.com',
+  ];
 
   constructor(query?: ChatQueryParam) {
     this.dbClient = new DynamoDBClient({});
@@ -59,6 +64,12 @@ export class ChatGptQueryHandler {
     };
 
     try {
+      const daxClient = new AmazonDaxClient({
+        endpoints: this.dax_endpoint,
+        region: 'us-east-1',
+      });
+      const docClient = new DynamoDB.DocumentClient({ service: daxClient });
+
       const response = await this.dbClient.send(new QueryCommand(params));
       if (!response.Items) return [];
       console.log(response.Items);
