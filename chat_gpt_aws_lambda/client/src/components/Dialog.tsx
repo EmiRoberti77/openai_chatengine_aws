@@ -14,6 +14,7 @@ import SavedHistory from './SavedHistory';
 import { Auth } from 'aws-amplify';
 import { removeUser } from '../state/features/UserSlice';
 import './css/Dialog.css';
+import FileUpload from './FileUpload';
 
 const chatApi = new CharServer();
 
@@ -25,6 +26,13 @@ const Dialog: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
   const history = useSelector((state: RootState) => state.history);
+  const [fileContent, setFileContent] = useState<string | undefined>(undefined);
+
+  const onFileContentHandle = (content: string) => {
+    console.log('onFileContentHandle');
+    setFileContent(content);
+    setUserInput(content);
+  };
 
   const deleteHistoryHandler = () => {
     dispatch(deleteAllHistory());
@@ -145,6 +153,7 @@ const Dialog: React.FC = () => {
                   boxSizing: 'border-box',
                 }}
               />
+              <FileUpload onFileContentHandle={onFileContentHandle} />
             </div>
             <div style={{ marginTop: '10px' }}>
               <button
