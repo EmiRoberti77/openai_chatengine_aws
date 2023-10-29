@@ -15,6 +15,7 @@ import { Auth } from 'aws-amplify';
 import { removeUser } from '../state/features/UserSlice';
 import './css/Dialog.css';
 import FileUpload from './FileUpload';
+import { GEN_AI_ENGINE } from '../Share/Util';
 
 const chatApi = new CharServer();
 
@@ -24,15 +25,24 @@ const Dialog: React.FC = () => {
   const [fullUserName, setFullUserName] = useState<string>('');
   const [userInput, setUserInput] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const dispatch = useDispatch();
   const history = useSelector((state: RootState) => state.history);
   const [fileContent, setFileContent] = useState<string | undefined>(undefined);
   const [showExtraOptions, setShowExtraOptions] = useState<boolean>(false);
+  const [onSelectedEngine, setOnSelectedEngine] = useState<string>(
+    GEN_AI_ENGINE.CHATGPT_GPT3_5_TURBO
+  );
+
+  const dispatch = useDispatch();
 
   const onFileContentHandle = (content: string) => {
-    console.log('onFileContentHandle');
+    console.info('onFileContentHandle', content);
     setFileContent(content);
     setUserInput(content);
+  };
+
+  const onSelectedEngineHandle = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.info(e.target.value);
+    setOnSelectedEngine(e.target.value);
   };
 
   const deleteHistoryHandler = () => {
@@ -155,19 +165,43 @@ const Dialog: React.FC = () => {
                 }}
               />
             </div>
-            <div style={{ marginTop: '10px' }}>
+            <div style={{ marginTop: '10px', marginBottom: '10px' }}>
+              <button
+                className="styled-button clear-history"
+                onClick={() => setShowExtraOptions(!showExtraOptions)}
+                style={{ marginTop: '10px', marginBottom: '10px' }}
+              >
+                {showExtraOptions ? 'Show less' : 'Show More'}
+              </button>
               {showExtraOptions && (
-                <FileUpload onFileContentHandle={onFileContentHandle} />
+                <div>
+                  <FileUpload
+                    onFileContentHandle={onFileContentHandle}
+                    styleName="styled-button clear-history"
+                  />
+                  <select
+                    className="styled-button clear-history"
+                    style={{ marginTop: '10px' }}
+                  >
+                    <option value={GEN_AI_ENGINE.CHATGPT_GPT3_5_TURBO}>
+                      {GEN_AI_ENGINE.CHATGPT_GPT3_5_TURBO.toString()}
+                    </option>
+                    <option value={GEN_AI_ENGINE.CHATGPT_GPT4}>
+                      {GEN_AI_ENGINE.CHATGPT_GPT4.toString()}
+                    </option>
+                  </select>
+                </div>
               )}
               <button
                 className="styled-button clear-history"
                 onClick={handleUserInput}
-                style={{ padding: '10px 15px' }}
+                style={{
+                  padding: '10px 15px',
+                  marginTop: '10px',
+                  width: '120px',
+                }}
               >
                 Ask
-              </button>
-              <button onClick={() => setShowExtraOptions(!showExtraOptions)}>
-                {showExtraOptions ? '-' : '+'}
               </button>
             </div>
             <div style={{ marginTop: '10px' }}>

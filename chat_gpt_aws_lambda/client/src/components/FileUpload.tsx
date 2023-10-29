@@ -3,9 +3,13 @@ import { noAllowedFiles } from '../Share/Util';
 
 interface FileUploadProps {
   onFileContentHandle: (content: string) => void;
+  styleName: string;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ onFileContentHandle }) => {
+const FileUpload: React.FC<FileUploadProps> = ({
+  onFileContentHandle,
+  styleName,
+}) => {
   const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,8 +41,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileContentHandle }) => {
   return (
     <div>
       <div>
-        <input type="file" onChange={handleFileUpload} />
-        <button onClick={upload}>+</button>
+        <input className={styleName} type="file" onChange={handleFileUpload} />
+        <button className={styleName} onClick={upload}>
+          +
+        </button>
       </div>
     </div>
   );
