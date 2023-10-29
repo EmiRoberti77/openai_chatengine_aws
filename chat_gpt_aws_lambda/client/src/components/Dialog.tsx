@@ -27,6 +27,7 @@ const Dialog: React.FC = () => {
   const dispatch = useDispatch();
   const history = useSelector((state: RootState) => state.history);
   const [fileContent, setFileContent] = useState<string | undefined>(undefined);
+  const [showExtraOptions, setShowExtraOptions] = useState<boolean>(false);
 
   const onFileContentHandle = (content: string) => {
     console.log('onFileContentHandle');
@@ -153,15 +154,20 @@ const Dialog: React.FC = () => {
                   boxSizing: 'border-box',
                 }}
               />
-              <FileUpload onFileContentHandle={onFileContentHandle} />
             </div>
             <div style={{ marginTop: '10px' }}>
+              {showExtraOptions && (
+                <FileUpload onFileContentHandle={onFileContentHandle} />
+              )}
               <button
                 className="styled-button clear-history"
                 onClick={handleUserInput}
                 style={{ padding: '10px 15px' }}
               >
                 Ask
+              </button>
+              <button onClick={() => setShowExtraOptions(!showExtraOptions)}>
+                {showExtraOptions ? '-' : '+'}
               </button>
             </div>
             <div style={{ marginTop: '10px' }}>
