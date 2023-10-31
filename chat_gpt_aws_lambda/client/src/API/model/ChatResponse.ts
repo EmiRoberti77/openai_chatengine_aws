@@ -3,6 +3,7 @@ import { UsageToken } from './Usage';
 export interface ChatInput {
   username: string;
   input: string;
+  engine: string;
 }
 
 export interface ChatResponse {

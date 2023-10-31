@@ -11,4 +11,5 @@ export interface ChatQueryParam {
   createdAt: string;
   chatCompletion: any; //this is the ChatGPT return
   userInput: UserInput;
+  engine: string;
 }

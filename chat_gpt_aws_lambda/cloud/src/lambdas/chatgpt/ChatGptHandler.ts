@@ -1,11 +1,15 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import OpenAI from 'openai';
-import { HTTP_CODE, jsonApiProxyResultResponse } from '../../util';
+import {
+  HTTP_CODE,
+  allModels,
+  jsonApiProxyResultResponse,
+  validateGenAIengine,
+} from '../../util';
 import { ChatGptQueryHandler } from './ChatGptQueryHandler';
 import { ChatQueryParam } from './ChatQueryParam';
 import { randomUUID } from 'crypto';
 import { SSMClient, GetParameterCommand } from '@aws-sdk/client-ssm';
-import { timeStamp } from 'console';
 const ssmClient = new SSMClient({});
 export class ChatGptHandler {
   private event: APIGatewayProxyEvent;
@@ -83,7 +87,7 @@ export class ChatGptHandler {
           body: 'missing body',
         });
       }
-      const { input, username } = JSON.parse(this.event.body);
+      const { input, username, engine } = JSON.parse(this.event.body);
       console.log(username, input);
 
       const openAiKey = await this.getSecret('chat_gpt_api_key');
@@ -94,13 +98,22 @@ export class ChatGptHandler {
         });
       }
 
+      if (!validateGenAIengine(engine)) {
+        return jsonApiProxyResultResponse(HTTP_CODE.NOT_FOUND, {
+          message: false,
+          body: `missing correct ai engine, models supported are: ${allModels}`,
+        });
+      }
+
       const openai = new (OpenAI as any)({
         apiKey: openAiKey,
       });
 
+      console.info('selected engine', engine);
+
       const chatCompletion = await openai.chat.completions.create({
         messages: [{ role: 'user', content: input }], //do not use the username passed from the UI as chat gpt only uses ['system', 'assistant', 'user', 'function']
-        model: 'gpt-3.5-turbo',
+        model: engine.split(':')[1], //take the second element of array : chatgpt:gpt-3.5-turbo
       });
 
       //prep query to be saved in dynamo table
@@ -116,6 +129,7 @@ export class ChatGptHandler {
           input,
         },
         chatCompletion,
+        engine,
       };
       //save to dynamo
       await new ChatGptQueryHandler(chatQueryParam).saveQuery();

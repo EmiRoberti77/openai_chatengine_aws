@@ -98,6 +98,7 @@ const Dialog: React.FC = () => {
     const chatResponse: ChatResponse = await chatApi.askServer({
       username: userName,
       input: userInput,
+      engine: onSelectedEngine,
     });
     setResponse(chatResponse);
     setIsLoading(false);
@@ -180,6 +181,7 @@ const Dialog: React.FC = () => {
                     styleName="styled-button clear-history"
                   />
                   <select
+                    onChange={onSelectedEngineHandle}
                     className="styled-button clear-history"
                     style={{ marginTop: '10px' }}
                   >

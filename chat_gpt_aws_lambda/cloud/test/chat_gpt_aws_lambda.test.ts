@@ -1,5 +1,5 @@
 import { handler } from '../src/lambdas/chatgpt/handler';
-import { HTTP_METHOD } from '../src/util';
+import { HTTP_METHOD, allModels } from '../src/util';
 
 const testChatLambda = async (): Promise<void> => {
   const param = {
@@ -7,6 +7,7 @@ const testChatLambda = async (): Promise<void> => {
     body: JSON.stringify({
       input: 'what is 2+2+3=?',
       username: 'emi_code',
+      engine: allModels[1],
     }),
   };
 
