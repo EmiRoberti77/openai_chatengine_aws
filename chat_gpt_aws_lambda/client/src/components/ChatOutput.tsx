@@ -19,7 +19,6 @@ const ChatOutput: React.FC<ChatOutputProps> = ({ chatResponse }) => {
 };
 
 export default ChatOutput;
-
 const styles = {
   container: {
     maxWidth: '80%',
@@ -43,5 +42,6 @@ const styles = {
   content: {
     fontSize: '1rem',
     textAlign: 'left',
+    whiteSpace: 'pre-line',
   } as React.CSSProperties,
 };

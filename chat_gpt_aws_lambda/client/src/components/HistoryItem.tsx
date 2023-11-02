@@ -7,7 +7,7 @@ interface HistoryItemProps {
 
 const HistoryItem: React.FC<HistoryItemProps> = ({ historyItem }) => {
   useEffect(() => {
-    console.log('historyItem', historyItem);
+    //console.log('historyItem', historyItem);
   }, []);
 
   const isValid = () => {

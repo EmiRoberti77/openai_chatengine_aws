@@ -10,7 +10,7 @@ const SavedHistoryItem: React.FC<SavedHistoryItemProp> = ({
   return (
     <div style={styles.container}>
       <div style={styles.date}>{savedChatItem.createdAt}</div>
-      <div>
+      <div style={{ backgroundColor: '#f3e5f5' }}>
         <span style={styles.label}>input:</span>
         {savedChatItem.userInput.input}
       </div>
@@ -49,11 +49,13 @@ const styles = {
     color: '#616161',
     fontWeight: 'bold',
     marginRight: '5px',
-  },
+    whiteSpace: 'pre-line',
+  } as React.CSSProperties,
   content: {
     fontSize: '1rem',
     marginBottom: '10px',
-  },
+    whiteSpace: 'pre-line',
+  } as React.CSSProperties,
   usage: {
     borderTop: '1px solid #e0e0e0',
     paddingTop: '10px',

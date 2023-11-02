@@ -7,8 +7,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../state/Store';
 
 const chatServer = new CharServer();
-
-const SavedHistory: React.FC = () => {
+interface SavedHistoryProps {
+  reload: boolean;
+}
+const SavedHistory: React.FC<SavedHistoryProps> = ({ reload }) => {
   const reduxUser = useSelector((state: RootState) => state.user);
   const [savedChats, setSavedChats] = useState<SavedChatHistory[] | undefined>(
     undefined
@@ -33,8 +35,9 @@ const SavedHistory: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    fetchSavedHistory().catch((error) => console.error(error));
     console.log('updated saveChats', savedChats);
-  }, [savedChats]);
+  }, [reload]);
 
   return (
     <div>

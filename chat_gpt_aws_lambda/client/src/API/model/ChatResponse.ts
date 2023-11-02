@@ -1,3 +1,4 @@
+import { Usage } from './SaveChatHistory';
 import { UsageToken } from './Usage';
 
 export interface ChatInput {
@@ -30,4 +31,19 @@ export const fillChatResponse = (
     role,
     usage,
   };
+};
+
+export const fillSampleChatResponse = (content: string, role: string) => {
+  const usage: Usage = {
+    prompt_tokens: 10,
+    completion_tokens: 10,
+    total_tokens: 20,
+  };
+  const response: ChatResponse = {
+    content,
+    role,
+    usage,
+  };
+
+  return response;
 };

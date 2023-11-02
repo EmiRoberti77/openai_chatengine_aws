@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { CharServer } from '../API/ChatServer';
-import { ChatResponse, getChatResponse } from '../API/model/ChatResponse';
+import {
+  ChatResponse,
+  fillChatResponse,
+  fillSampleChatResponse,
+  getChatResponse,
+} from '../API/model/ChatResponse';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../state/Store';
 import {
@@ -15,7 +20,7 @@ import { Auth } from 'aws-amplify';
 import { removeUser } from '../state/features/UserSlice';
 import './css/Dialog.css';
 import FileUpload from './FileUpload';
-import { GEN_AI_ENGINE } from '../Share/Util';
+import { GEN_AI_ENGINE, QUESTION_DELIMINATOR } from '../Share/Util';
 
 const chatApi = new CharServer();
 
@@ -31,6 +36,7 @@ const Dialog: React.FC = () => {
   const [onSelectedEngine, setOnSelectedEngine] = useState<string>(
     GEN_AI_ENGINE.CHATGPT_GPT3_5_TURBO
   );
+  const [reloadSavedHistory, setReloadSavedHistory] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -94,6 +100,7 @@ const Dialog: React.FC = () => {
       setResponse(getChatResponse('missing username'));
       return;
     }
+
     setIsLoading(true);
     const chatResponse: ChatResponse = await chatApi.askServer({
       username: userName,
@@ -102,7 +109,35 @@ const Dialog: React.FC = () => {
     });
     setResponse(chatResponse);
     setIsLoading(false);
+    setReloadSavedHistory(!reloadSavedHistory);
     dispatch(pushToHistory(createHistory(userInput, chatResponse)));
+  };
+
+  const processInput = async (): Promise<boolean> => {
+    const questions: string[] = userInput.split(QUESTION_DELIMINATOR);
+    console.log(questions);
+    var index: number = 0;
+    for (const question in questions) {
+      if (question === '') {
+        console.log('found empty string');
+        continue;
+      } else {
+        setIsLoading(true);
+        console.log('valid question', questions[index]);
+        const chatResponse: ChatResponse = await chatApi.askServer({
+          username: userName,
+          input: question[index],
+          engine: onSelectedEngine,
+        });
+        console.log('response', chatResponse);
+        setResponse(chatResponse);
+        dispatch(pushToHistory(createHistory(userInput, chatResponse)));
+        setIsLoading(false);
+      }
+      index++;
+    }
+
+    return true;
   };
 
   return (
@@ -220,7 +255,7 @@ const Dialog: React.FC = () => {
                 ''
               )}
               <div>
-                <SavedHistory />
+                <SavedHistory reload={reloadSavedHistory} />
               </div>
             </div>
           </div>
