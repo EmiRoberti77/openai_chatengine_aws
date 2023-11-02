@@ -227,6 +227,13 @@ const Dialog: React.FC = () => {
                       {GEN_AI_ENGINE.CHATGPT_GPT4.toString()}
                     </option>
                   </select>
+                  <select
+                    className="styled-button clear-history"
+                    style={{ marginTop: '10px' }}
+                  >
+                    <option>Equine Register model</option>
+                    <option>General Model</option>
+                  </select>
                 </div>
               )}
               <button
@@ -245,13 +252,14 @@ const Dialog: React.FC = () => {
               {isLoading ? (
                 <div>Loading . . </div>
               ) : response ? (
-                <ChatOutput
-                  chatResponse={{
-                    role: 'assistant',
-                    content: response.content,
-                  }}
-                />
+                <div>done</div>
               ) : (
+                // <ChatOutput
+                //   chatResponse={{
+                //     role: 'assistant',
+                //     content: response.content,
+                //   }}
+                // />
                 ''
               )}
               <div>
