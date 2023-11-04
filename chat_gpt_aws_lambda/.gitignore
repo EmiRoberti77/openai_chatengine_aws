@@ -8,3 +8,7 @@ cloud/src/lambdas/chatgpt/Config.ts
 .cdk.staging
 cdk.out
 notes
+.aws-sam/
+bedrock_sam/.aws-sam
+invoke.txt
+samconfig.toml

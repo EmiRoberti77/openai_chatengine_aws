@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Resources:
+  bedrockLambdaPy:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      CodeUri: src/
+      Handler: index.lambda_handler
+      Runtime: python3.9
+      MemorySize: 128
+      Timeout: 600
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: 'bedrock:*'
+              Resource: '*'
+      Events:
+        EmiBedrockApiGET:
+          Type: Api
+          Properties:
+            Path: /bedrock
+            Method: get
+            RestApiId:
+              Ref: EmiBedrockApi
+        EmiBedrockApiPost:
+          Type: Api
+          Properties:
+            Path: /bedrock
+            Method: post
+            RestApiId:
+              Ref: EmiBedrockApi
+
+  EmiBedrockApi:
+    Type: 'AWS::Serverless::Api'
+    Properties:
+      StageName: prod
+      Cors:
+        AllowMethods: "'GET,POST'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowOrigin: "'*'"
+
+  bedrockJSFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      CodeUri: src/
+      Handler: lambdaJavascript.handler
+      Runtime: nodejs18.x
+      MemorySize: 128
+      Timeout: 600
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: 'bedrock:*'
+              Resource: '*'
