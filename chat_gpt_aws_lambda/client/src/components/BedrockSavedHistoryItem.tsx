@@ -1,12 +1,30 @@
 import React, { useEffect } from 'react';
 import { SavedChatHistory } from '../API/model/SaveChatHistory';
+import { BedrockResponse } from '../API/model/BedrockResponse';
 
 interface SavedHistoryItemProp {
   savedChatItem: SavedChatHistory;
 }
-const ChatGptSavedHistoryItem: React.FC<SavedHistoryItemProp> = ({
+
+const BedrockSavedHistoryItem: React.FC<SavedHistoryItemProp> = ({
   savedChatItem,
 }) => {
+  const getResponse = (chatCompletion: any): string => {
+    const response: BedrockResponse = chatCompletion;
+    console.log(response);
+    return response.completions[0].data.text;
+  };
+
+  const getCompletionTokens = (chatCompletion: any): number => {
+    const response: BedrockResponse = chatCompletion;
+    return response.completions[0].data.tokens.length;
+  };
+
+  const getPromptTokens = (chatCompletion: any): number => {
+    const response: BedrockResponse = chatCompletion;
+    return response.prompt.tokens.length;
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.date}>
@@ -18,16 +36,18 @@ const ChatGptSavedHistoryItem: React.FC<SavedHistoryItemProp> = ({
       </div>
       <div>
         <span style={styles.label}>role:</span>
-        {savedChatItem.chatCompletion.choices[0].message.role}
+        {'assistant'}
       </div>
       <div style={styles.content}>
-        {savedChatItem.chatCompletion.choices[0].message.content}
+        {getResponse(savedChatItem.chatCompletion)}
       </div>
       <hr />
       <div style={styles.usage}>
-        prompt tokens: {savedChatItem.chatCompletion.usage.prompt_tokens},
-        completion token: {savedChatItem.chatCompletion.usage.completion_tokens}
-        , total: {savedChatItem.chatCompletion.usage.total_tokens}
+        prompt tokens: {getPromptTokens(savedChatItem.chatCompletion)},
+        completion token: {getCompletionTokens(savedChatItem.chatCompletion)} ,
+        total:{' '}
+        {getPromptTokens(savedChatItem.chatCompletion) +
+          getCompletionTokens(savedChatItem.chatCompletion)}
       </div>
     </div>
   );
@@ -76,4 +96,4 @@ const styles = {
   },
 };
 
-export default ChatGptSavedHistoryItem;
+export default BedrockSavedHistoryItem;

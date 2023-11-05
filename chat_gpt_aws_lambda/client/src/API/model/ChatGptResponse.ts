@@ -7,7 +7,7 @@ export interface ChatInput {
   engine: string;
 }
 
-export interface ChatResponse {
+export interface ChatGptResponse {
   content: string;
   role: string;
   usage: UsageToken;
@@ -25,7 +25,7 @@ export const fillChatResponse = (
   content: string,
   role: string,
   usage: UsageToken
-): ChatResponse => {
+): ChatGptResponse => {
   return {
     content,
     role,
@@ -39,7 +39,7 @@ export const fillSampleChatResponse = (content: string, role: string) => {
     completion_tokens: 10,
     total_tokens: 20,
   };
-  const response: ChatResponse = {
+  const response: ChatGptResponse = {
     content,
     role,
     usage,

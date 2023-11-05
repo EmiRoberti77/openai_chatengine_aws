@@ -1,12 +1,11 @@
 import axios from 'axios';
 import {
   ChatInput,
-  ChatResponse,
+  ChatGptResponse,
   fillChatResponse,
-} from './model/ChatResponse';
+} from './model/ChatGptResponse';
 import ApiError from './ApiError';
 import { UsageToken } from './model/Usage';
-import { ChatHistory } from './model/ChatHistory';
 import { SavedChatHistory } from './model/SaveChatHistory';
 
 export class CharServer {
@@ -15,7 +14,7 @@ export class CharServer {
     this.endpoint = process.env.REACT_APP_API_END_POINT!;
   }
 
-  private async postRequest(chatInput: ChatInput): Promise<ChatResponse> {
+  private async postRequest(chatInput: ChatInput): Promise<ChatGptResponse> {
     try {
       const response = await axios.post(this.endpoint, chatInput, {
         headers: {
@@ -56,7 +55,7 @@ export class CharServer {
     }
   }
 
-  public async askServer(chatInput: ChatInput): Promise<ChatResponse> {
+  public async askServer(chatInput: ChatInput): Promise<ChatGptResponse> {
     return await this.postRequest(chatInput);
   }
 
@@ -64,7 +63,7 @@ export class CharServer {
     content: string = 'no response',
     role: string,
     usage: UsageToken
-  ): ChatResponse {
+  ): ChatGptResponse {
     return fillChatResponse(content, role, usage);
   }
 }

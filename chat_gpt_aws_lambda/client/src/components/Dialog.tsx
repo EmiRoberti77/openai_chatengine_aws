@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { CharServer } from '../API/ChatServer';
 import {
-  ChatResponse,
+  ChatGptResponse,
   fillChatResponse,
   fillSampleChatResponse,
   getChatResponse,
-} from '../API/model/ChatResponse';
+} from '../API/model/ChatGptResponse';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../state/Store';
 import {
@@ -25,7 +25,9 @@ import { GEN_AI_ENGINE, QUESTION_DELIMINATOR } from '../Share/Util';
 const chatApi = new CharServer();
 
 const Dialog: React.FC = () => {
-  const [response, setResponse] = useState<ChatResponse | undefined>(undefined);
+  const [response, setResponse] = useState<ChatGptResponse | undefined>(
+    undefined
+  );
   const [userName, setUserName] = useState<string>('');
   const [fullUserName, setFullUserName] = useState<string>('');
   const [userInput, setUserInput] = useState<string>('');
@@ -79,7 +81,7 @@ const Dialog: React.FC = () => {
 
   const createHistory = (
     input: string,
-    chatResponse: ChatResponse
+    chatResponse: ChatGptResponse
   ): ChatHistory => {
     return {
       createdAt: new Date().toISOString(),
@@ -103,7 +105,7 @@ const Dialog: React.FC = () => {
     }
 
     setIsLoading(true);
-    const chatResponse: ChatResponse = await chatApi.askServer({
+    const chatResponse: ChatGptResponse = await chatApi.askServer({
       username: userName,
       input: userInput,
       engine: onSelectedEngine,
@@ -125,7 +127,7 @@ const Dialog: React.FC = () => {
       } else {
         setIsLoading(true);
         console.log('valid question', questions[index]);
-        const chatResponse: ChatResponse = await chatApi.askServer({
+        const chatResponse: ChatGptResponse = await chatApi.askServer({
           username: userName,
           input: question[index],
           engine: onSelectedEngine,

@@ -5,6 +5,7 @@ import { SavedChatHistory } from '../API/model/SaveChatHistory';
 import { Auth } from 'aws-amplify';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/Store';
+import BedrockSavedHistoryItem from './BedrockSavedHistoryItem';
 
 const chatServer = new CharServer();
 interface SavedHistoryProps {
@@ -32,10 +33,6 @@ const SavedHistory: React.FC<SavedHistoryProps> = ({ reload }) => {
   useEffect(() => {
     console.log('reduxUser', reduxUser);
     fetchSavedHistory().catch((error) => console.error(error));
-  }, []);
-
-  useEffect(() => {
-    fetchSavedHistory().catch((error) => console.error(error));
     console.log('updated saveChats', savedChats);
   }, [reload]);
 
@@ -47,7 +44,7 @@ const SavedHistory: React.FC<SavedHistoryProps> = ({ reload }) => {
           <div key={`parent${index}`}>
             <div key={`child${index}`}>
               {item.engine.startsWith('bedrock') ? (
-                <div>berock</div>
+                <BedrockSavedHistoryItem savedChatItem={item} />
               ) : (
                 <ChatGptSavedHistoryItem savedChatItem={item} />
               )}
