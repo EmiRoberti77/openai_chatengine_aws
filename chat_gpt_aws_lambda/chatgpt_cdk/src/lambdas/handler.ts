@@ -1,7 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { HTTP_CODE, HTTP_METHOD, jsonApiProxyResultResponse } from '../../util';
-import { ChatGptHandler } from './ChatGptHandler';
-import { BedrockHandler } from '../bedrock/BedrockHandler';
+import { HTTP_CODE, HTTP_METHOD, jsonApiProxyResultResponse } from '../util';
+import { ChatGptHandler } from './chatgpt/ChatGptHandler';
+import { BedrockHandler } from './bedrock/BedrockHandler';
 
 export const handler = async (
   event: APIGatewayProxyEvent

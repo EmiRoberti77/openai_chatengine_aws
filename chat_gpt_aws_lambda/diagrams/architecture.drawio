@@ -250,7 +250,7 @@
                     <mxGeometry x="870" y="580" width="78" height="78" as="geometry"/>
                 </mxCell>
                 <mxCell id="72" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#4AB29A;gradientDirection=north;fillColor=#116D5B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.augmented_ai;" vertex="1" parent="1">
-                    <mxGeometry x="880" y="700" width="78" height="78" as="geometry"/>
+                    <mxGeometry x="874" y="700" width="78" height="78" as="geometry"/>
                 </mxCell>
                 <mxCell id="76" value="AI21" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="879" y="440" width="60" height="30" as="geometry"/>
@@ -260,6 +260,9 @@
                 </mxCell>
                 <mxCell id="78" value="Claude" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="888" y="670" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="80" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.android;fillColor=#FFD44F;gradientColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="623.5" y="570" width="43" height="48" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

@@ -1,17 +1,19 @@
 
 Emi notes on the project
+log:5/11/23
+[ ] FE-FIX:Database return query can come back after the page refreshed from local redux state 
 log:04/11/23
-[ ] BE - integrate to new bedrock sam api
-[ ] BE - link database class to save response from Chatgpt and Bedrock
-[ ] FE - loop questions from CSV file into engine
-[*] FE - update history of saved queries with correct call back
+[ ] BE-NEW:integrate to new bedrock sam api
+[ ] BE-NEW:link database class to save response from Chatgpt and Bedrock
+[ ] FE-NEW:loop questions from CSV file into engine
+[*] FE-NEW:update history of saved queries with correct call back
 log:28/10/23
-[ ] FE - add engine attribute to to ui return query
+[ ] FE-add engine attribute to to ui return query
 log:27/10/23
-[*]upload a file to the prompt box
+[*]FE-NEW:upload a file to the prompt box
 log:26/10/23
-[*] create user redux slice
-[*] dispatch(addUser(user)) on login
-[*] useSelector(state:RootState=>state.user) in SavedHistory Component
-[*] dispatch(removeUser()) on logout
+[*] FE-NEW:create user redux slice
+[*] FE-NEW:dispatch(addUser(user)) on login
+[*] FE-NEW:useSelector(state:RootState=>state.user) in SavedHistory Component
+[*] FE-NEW:dispatch(removeUser()) on logout
 

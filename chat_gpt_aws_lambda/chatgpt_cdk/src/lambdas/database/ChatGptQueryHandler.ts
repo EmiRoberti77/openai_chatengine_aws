@@ -6,7 +6,7 @@ import {
 } from '@aws-sdk/client-dynamodb';
 import { DYNAMO_TABLES } from '../../util';
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
-import { ChatQueryParam } from './ChatQueryParam';
+import { ChatQueryParam } from '../chatgpt/ChatQueryParam';
 
 export class ChatGptQueryHandler {
   private dbClient: DynamoDBClient;

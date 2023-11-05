@@ -1,4 +1,4 @@
-import { handler } from '../src/lambdas/chatgpt/handler';
+import { handler } from '../src/lambdas/handler';
 import { HTTP_METHOD, allModels } from '../src/util';
 
 const testChatLambda = async (): Promise<void> => {

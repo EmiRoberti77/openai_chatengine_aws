@@ -26,14 +26,7 @@ export class ChatGptAwsLambdaStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const path = join(
-      __dirname,
-      '..',
-      'src',
-      'lambdas',
-      'chatgpt',
-      'handler.ts'
-    );
+    const path = join(__dirname, '..', 'src', 'lambdas', 'handler.ts');
     if (!existsSync(path)) {
       console.error('NOT FOUND', path);
       return;

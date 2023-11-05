@@ -6,7 +6,7 @@ import {
   jsonApiProxyResultResponse,
   validateGenAIengine,
 } from '../../util';
-import { ChatGptQueryHandler } from './ChatGptQueryHandler';
+import { ChatGptQueryHandler } from '../database/ChatGptQueryHandler';
 import { ChatQueryParam } from './ChatQueryParam';
 import { randomUUID } from 'crypto';
 import { SSMClient, GetParameterCommand } from '@aws-sdk/client-ssm';
