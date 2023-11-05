@@ -1,0 +1,24 @@
+ROADMAP
+
+FE - actions
+
+[ ] choose Gen AI engine -
+based on the mode of the question, the correct engine is selected to provode
+best answer
+[ ] choose Chat GPT - all models
+
+there are more the one model, we need to support all models
+[ ] choose Bedrock
+allow bedrok integration based and its engines models
+-- DOCUMENT AI --
+[ ] pass csv files
+
+- - [ ] read from file in react page to pass to prompt
+- - [ ] store file in S3 if needs to be read again and passed to model for further queries
+
+-- VISION AI --
+[ ] pass image for object detection and metatdata creation
+
+- -[ ] logo detection
+- -[ ] demographics detection
+- -[ ] object classification detection

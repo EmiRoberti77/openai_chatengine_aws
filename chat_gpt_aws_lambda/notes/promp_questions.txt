@@ -1,0 +1,72 @@
+--question--
+staff,sales in GBP,store
+Mark,12000,London
+James,13000,London
+Ben,34000,London
+Kelly,45000,London
+Jane,400,London
+Jessica,2200,Manchester
+Jim,12000,London
+Markus,7200,London
+Jimmy,40000,Manchester
+Ken,3000,Manchester
+Kathy,40000,Manchester
+Janet,4000,London
+Jess,200,London
+Jeff,100,Leeds
+
+witch staff has the highest code and level on these exams results?
+--question--
+week1
+staff,sales in GBP,store
+Mark,12000,London
+James,13000,London
+Ben,34000,London
+Kelly,45000,London
+Jane,400,London
+Jessica,2200,Manchester
+Jim,12000,London
+Markus,7200,London
+Jimmy,40000,Manchester
+Ken,3000,Manchester
+Kathy,40000,Manchester
+Janet,4000,London
+Jess,200,London
+Jeff,100,Leeds
+week2
+staff,sales in GBP,store
+Mark,13000,London
+James,15000,London
+Ben,34050,London
+Kelly,145000,London
+Jane,400,London
+Jessica,1100000,Manchester
+Jim,12000,London
+Markus,7200,London
+Jimmy,40000,Manchester
+Ken,3000,Manchester
+Kathy,40000,Manchester
+Janet,4000,London
+Jess,200,London
+Jeff,100,Leeds
+
+witch staff has the highest score and level on these exams results over the two weeks
+
+--question--
+staff,sales in GBP,store
+Mark,12000,London
+James,13000,London
+Ben,34000,London
+Kelly,45000,London
+Jane,400,London
+Jessica,2200,Manchester
+Jim,12000,London
+Markus,7200,London
+Jimmy,40000,Manchester
+Ken,3000,Manchester
+Kathy,40000,Manchester
+Janet,4000,London
+Jess,200,London
+Jeff,100,Leeds
+
+witch is the the stores with the lowest sales and the store with the higest sales for week 1?

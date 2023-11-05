@@ -7,7 +7,6 @@ cloud/src/lambdas/chatgpt/Config.ts
 # CDK asset staging directory
 .cdk.staging
 cdk.out
-notes
 .aws-sam/
 bedrock_sam/.aws-sam
 invoke.txt

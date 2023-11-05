@@ -1,0 +1,17 @@
+
+Emi notes on the project
+log:04/11/23
+[ ] BE - integrate to new bedrock sam api
+[ ] BE - link database class to save response from Chatgpt and Bedrock
+[ ] FE - loop questions from CSV file into engine
+[*] FE - update history of saved queries with correct call back
+log:28/10/23
+[ ] FE - add engine attribute to to ui return query
+log:27/10/23
+[*]upload a file to the prompt box
+log:26/10/23
+[*] create user redux slice
+[*] dispatch(addUser(user)) on login
+[*] useSelector(state:RootState=>state.user) in SavedHistory Component
+[*] dispatch(removeUser()) on logout
+
