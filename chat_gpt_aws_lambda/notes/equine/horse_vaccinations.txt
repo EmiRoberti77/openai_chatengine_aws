@@ -1,0 +1,94 @@
+here are vaccination for each horse
+1. Thunder
+- Tetanus (Lockjaw) Vaccine
+- Equine Influenza (Flu) Vaccine
+- Equine Herpesvirus (Rhinopneumonitis) Vaccine
+- Rabies Vaccine
+- West Nile Virus Vaccine
+- Eastern and Western Equine Encephalitis (EEE/WEE) Vaccine
+- Strangles Vaccine
+- Botulism Vaccine
+- Potomac Horse Fever Vaccine
+- Anthrax Vaccine
+- Rotavirus Vaccine
+- Equine Viral Arteritis (EVA) Vaccine
+- Lyme Disease Vaccine
+- Leptospirosis Vaccine
+- Horse Pox (Variola Equina) Vaccine
+2. Bella
+- Tetanus (Lockjaw) Vaccine
+- Equine Influenza (Flu) Vaccine
+- Equine Herpesvirus (Rhinopneumonitis) Vaccine
+- Rabies Vaccine
+- West Nile Virus Vaccine
+- Eastern and Western Equine Encephalitis (EEE/WEE) Vaccine
+- Strangles Vaccine
+- Botulism Vaccine
+- Potomac Horse Fever Vaccine
+- Anthrax Vaccine
+- Rotavirus Vaccine
+- Equine Viral Arteritis (EVA) Vaccine
+- Lyme Disease Vaccine
+- Leptospirosis Vaccine
+- Horse Pox (Variola Equina) Vaccine
+3. Spirit
+- Tetanus (Lockjaw) Vaccine
+- Equine Influenza (Flu) Vaccine
+- Equine Herpesvirus (Rhinopneumonitis) Vaccine
+- Rabies Vaccine
+- West Nile Virus Vaccine
+- Eastern and Western Equine Encephalitis (EEE/WEE) Vaccine
+- Strangles Vaccine
+- Botulism Vaccine
+- Potomac Horse Fever Vaccine
+- Anthrax Vaccine
+4. Shadow
+- Tetanus (Lockjaw) Vaccine
+- Equine Influenza (Flu) Vaccine
+- Equine Herpesvirus (Rhinopneumonitis) Vaccine
+- Rabies Vaccine
+- West Nile Virus Vaccine
+- Eastern and Western Equine Encephalitis (EEE/WEE) Vaccine
+- Strangles Vaccine
+- Botulism Vaccine
+- Potomac Horse Fever Vaccine
+- Anthrax Vaccine
+- Rotavirus Vaccine
+- Equine Viral Arteritis (EVA) Vaccine
+5. Daisy
+- Strangles Vaccine
+- Botulism Vaccine
+- Potomac Horse Fever Vaccine
+- Anthrax Vaccine
+- Rotavirus Vaccine
+- Equine Viral Arteritis (EVA) Vaccine
+- Lyme Disease Vaccine
+- Leptospirosis Vaccine
+- Horse Pox (Variola Equina) Vaccine
+6. Rocky
+- Strangles Vaccine
+- Botulism Vaccine
+- Potomac Horse Fever Vaccine
+- Anthrax Vaccine
+- Rotavirus Vaccine
+- Equine Viral Arteritis (EVA) Vaccine
+- Lyme Disease Vaccine
+- Leptospirosis Vaccine
+- Horse Pox (Variola Equina) Vaccine
+7. Luna
+- Tetanus (Lockjaw) Vaccine
+- Equine Influenza (Flu) Vaccine
+- Equine Herpesvirus (Rhinopneumonitis) Vaccine
+- Rabies Vaccine
+- West Nile Virus Vaccine
+- Eastern and Western Equine Encephalitis (EEE/WEE) Vaccine
+- Strangles Vaccine
+- Botulism Vaccine
+- Potomac Horse Fever Vaccine
+- Anthrax Vaccine
+- Rotavirus Vaccine
+- Equine Viral Arteritis (EVA) Vaccine
+- Lyme Disease Vaccine
+- Leptospirosis Vaccine
+- Horse Pox (Variola Equina) Vaccine
+Which of these horses are missing the full list of 15 vaccinations?

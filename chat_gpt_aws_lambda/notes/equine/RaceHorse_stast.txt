@@ -1,0 +1,102 @@
+here are scorecards for each of the 20 horse names and their ratings:
+1. Thunder
+   - Speed: 8/10
+   - Stamina: 9/10
+   - Agility: 7/10
+   - Endurance: 8/10
+2. Bella
+   - Speed: 6/10
+   - Stamina: 7/10
+   - Agility: 8/10
+   - Endurance: 7/10
+3. Spirit
+   - Speed: 7/10
+   - Stamina: 6/10
+   - Agility: 9/10
+   - Endurance: 6/10
+4. Shadow
+   - Speed: 8/10
+   - Stamina: 7/10
+   - Agility: 6/10
+   - Endurance: 8/10
+5. Daisy
+   - Speed: 5/10
+   - Stamina: 8/10
+   - Agility: 7/10
+   - Endurance: 9/10
+6. Rocky
+   - Speed: 9/10
+   - Stamina: 9/10
+   - Agility: 5/10
+   - Endurance: 8/10
+7. Luna
+   - Speed: 7/10
+   - Stamina: 7/10
+   - Agility: 8/10
+   - Endurance: 7/10
+8. Maverick
+   - Speed: 9/10
+   - Stamina: 8/10
+   - Agility: 7/10
+   - Endurance: 9/10
+9. Rosie
+   - Speed: 6/10
+   - Stamina: 6/10
+   - Agility: 8/10
+   - Endurance: 7/10
+10. Scout
+    - Speed: 8/10
+    - Stamina: 7/10
+    - Agility: 9/10
+    - Endurance: 8/10
+11. Star
+    - Speed: 7/10
+    - Stamina: 8/10
+    - Agility: 7/10
+    - Endurance: 6/10
+12. Midnight
+    - Speed: 8/10
+    - Stamina: 7/10
+    - Agility: 8/10
+    - Endurance: 7/10
+13. Duke
+    - Speed: 9/10
+    - Stamina: 9/10
+    - Agility: 6/10
+    - Endurance: 8/10
+14. Willow
+    - Speed: 7/10
+    - Stamina: 6/10
+    - Agility: 7/10
+    - Endurance: 6/10
+15. Charlie
+    - Speed: 6/10
+    - Stamina: 9/10
+    - Agility: 8/10
+    - Endurance: 7/10
+16. Misty
+    - Speed: 5/10
+    - Stamina: 7/10
+    - Agility: 6/10
+    - Endurance: 8/10
+17. Rusty
+    - Speed: 7/10
+    - Stamina: 8/10
+    - Agility: 7/10
+    - Endurance: 6/10
+18. Coco
+    - Speed: 8/10
+    - Stamina: 6/10
+    - Agility: 9/10
+    - Endurance: 7/10
+19. Blaze
+    - Speed: 9/10
+    - Stamina: 8/10
+    - Agility: 8/10
+    - Endurance: 9/10
+20. Grace
+    - Speed: 6/10
+    - Stamina: 7/10
+    - Agility: 6/10
+    - Endurance: 8/10
+Witch of these horses is the has the best combination of speed and stamina?
