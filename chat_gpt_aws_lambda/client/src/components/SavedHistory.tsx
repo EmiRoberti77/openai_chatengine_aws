@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CharServer } from '../API/ChatServer';
-import SavedHistoryItem from './SavedHistoryItem';
+import ChatGptSavedHistoryItem from './ChatGptSavedHistoryItem';
 import { SavedChatHistory } from '../API/model/SaveChatHistory';
 import { Auth } from 'aws-amplify';
 import { useSelector } from 'react-redux';
@@ -46,7 +46,11 @@ const SavedHistory: React.FC<SavedHistoryProps> = ({ reload }) => {
         {savedChats?.map((item, index) => (
           <div key={`parent${index}`}>
             <div key={`child${index}`}>
-              <SavedHistoryItem savedChatItem={item} />
+              {item.engine.startsWith('bedrock') ? (
+                <div>berock</div>
+              ) : (
+                <ChatGptSavedHistoryItem savedChatItem={item} />
+              )}
             </div>
             <hr />
           </div>

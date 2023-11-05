@@ -3,6 +3,7 @@ export interface SavedChatHistory {
   username: string;
   userInput: UserInput;
   id: string;
+  engine: string;
   chatCompletion: ChatCompletion;
 }
 

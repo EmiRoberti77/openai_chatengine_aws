@@ -7,4 +7,5 @@ export interface ChatHistory {
   content: string;
   role: string;
   usage: UsageToken;
+  engine: string;
 }

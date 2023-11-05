@@ -4,7 +4,7 @@ import { SavedChatHistory } from '../API/model/SaveChatHistory';
 interface SavedHistoryItemProp {
   savedChatItem: SavedChatHistory;
 }
-const SavedHistoryItem: React.FC<SavedHistoryItemProp> = ({
+const ChatGptSavedHistoryItem: React.FC<SavedHistoryItemProp> = ({
   savedChatItem,
 }) => {
   return (
@@ -74,4 +74,4 @@ const styles = {
   },
 };
 
-export default SavedHistoryItem;
+export default ChatGptSavedHistoryItem;

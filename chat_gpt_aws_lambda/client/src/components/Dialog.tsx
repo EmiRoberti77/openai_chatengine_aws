@@ -88,6 +88,7 @@ const Dialog: React.FC = () => {
       role: chatResponse.role,
       content: chatResponse.content,
       usage: chatResponse.usage,
+      engine: onSelectedEngine,
     };
   };
 
@@ -225,6 +226,9 @@ const Dialog: React.FC = () => {
                     </option>
                     <option value={GEN_AI_ENGINE.CHATGPT_GPT4}>
                       {GEN_AI_ENGINE.CHATGPT_GPT4.toString()}
+                    </option>
+                    <option value={GEN_AI_ENGINE.BEDROCK_AI21_J2_ULTRA_V1}>
+                      {GEN_AI_ENGINE.BEDROCK_AI21_J2_ULTRA_V1.toString()}
                     </option>
                   </select>
                   <select

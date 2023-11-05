@@ -11,6 +11,10 @@ const HistoryItem: React.FC<HistoryItemProps> = ({ historyItem }) => {
   }, []);
 
   const isValid = () => {
+    if (historyItem.engine.startsWith('bedrock')) {
+      return false;
+    }
+
     if (!historyItem) {
       console.log('historyItem is null', historyItem);
       return false;
