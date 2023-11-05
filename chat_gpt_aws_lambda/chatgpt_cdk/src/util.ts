@@ -9,7 +9,11 @@ export enum HTTP_CODE {
   ERROR = 500,
 }
 
-export const allModels: string[] = ['chatgpt:gpt-3.5-turbo', 'chatgpt:gpt-4'];
+export const allModels: string[] = [
+  'chatgpt:gpt-3.5-turbo',
+  'chatgpt:gpt-4',
+  'bedrock:ai21.j2-ultra-v1',
+];
 
 export const validateGenAIengine = (model: string): boolean => {
   return allModels.includes(model);
